@@ -32,14 +32,6 @@ var TaskListComponent = React.createClass({
     };
   },
 
-  handleThToggleClick: function (event) {
-    // If the click happens on the checkbox, let the checkbox's onchange event
-    // handler handle it and skip handling the event here.
-    if (event.target.nodeName !== "INPUT") {
-      console.log("We deactivate select all because it's too dangerous");
-    }
-  },
-
   sortBy: function (sortKey) {
     var state = this.state;
 
@@ -203,8 +195,7 @@ var TaskListComponent = React.createClass({
           <thead>
             <tr>
               <th className=""
-                width="1"
-                onClick={this.handleThToggleClick}>
+                width="1">
               <input type="checkbox"
                 checked={this.allTasksSelected(tasksLength)}
                 disabled={true}

@@ -175,8 +175,6 @@ var AppActionsHandlerMixin = {
     var appId = this.props.model.id;
     var uri = config.deploymentDiagnosisUrlGenerate();
     if (uri == null) {
-      console.log("config.deploymentDiagnosisUrlGenerate returned null " +
-                  "so not doing anything");
       return;
     }
     // first dialog will disappear when second one will appear

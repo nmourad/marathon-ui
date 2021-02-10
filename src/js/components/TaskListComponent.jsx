@@ -25,19 +25,19 @@ var TaskListComponent = React.createClass({
     toggleAllTasks: React.PropTypes.func.isRequired
   },
 
+  handleThToggleClick: function (event) {
+    // If the click happens on the checkbox, let the checkbox's onchange event
+    // handler handle it and skip handling the event here.
+    if (event.target.nodeName !== "INPUT") {
+      event.preventDefault();
+    }
+  },
+
   getInitialState: function () {
     return {
       sortKey: "updatedAt",
       sortDescending: true
     };
-  },
-
-  handleThToggleClick: function (event) {
-    // If the click happens on the checkbox, let the checkbox's onchange event
-    // handler handle it and skip handling the event here.
-    if (event.target.nodeName !== "INPUT") {
-      console.log("We deactivate select all because it's too dangerous");
-    }
   },
 
   sortBy: function (sortKey) {

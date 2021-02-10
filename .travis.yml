@@ -3,7 +3,7 @@ before_install:
 - npm cache clear
 - npm install -g gulp
 node_js:
-- 5.4.1
+- 5.12.0
 script: npm run dist
 after_success: npm run cover:report
 before_deploy:

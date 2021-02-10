@@ -25,6 +25,14 @@ var TaskListComponent = React.createClass({
     toggleAllTasks: React.PropTypes.func.isRequired
   },
 
+  handleThToggleClick: function (event) {
+    // If the click happens on the checkbox, let the checkbox's onchange event
+    // handler handle it and skip handling the event here.
+    if (event.target.nodeName !== "INPUT") {
+      event.preventDefault();
+    }
+  },
+
   getInitialState: function () {
     return {
       sortKey: "updatedAt",
@@ -195,7 +203,8 @@ var TaskListComponent = React.createClass({
           <thead>
             <tr>
               <th className=""
-                width="1">
+                width="1"
+                onClick={this.handleThToggleClick}>
               <input type="checkbox"
                 checked={this.allTasksSelected(tasksLength)}
                 disabled={true}

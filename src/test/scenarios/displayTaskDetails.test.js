@@ -92,7 +92,13 @@ describe("TaskDetailComponent", function () {
     before(function () {
       this.model = Object.assign({}, baseModel, {
         host: "host-1",
-        ports: [1, 2, 3]
+        ports: [1, 2, 3],
+        ipAddresses: [
+          {
+            ipAddress: "172.16.190.4",
+            protocol: "IPv4"
+          }
+        ]
       });
 
       this.component = shallow(
@@ -117,7 +123,7 @@ describe("TaskDetailComponent", function () {
       expect(this.component
         .find(".task-details")
         .children()
-        .at(4)
+        .at(5)
         .text()
       ).to.equal("[1,2,3]");
     });
@@ -126,11 +132,11 @@ describe("TaskDetailComponent", function () {
       var list = this.component.find(".task-details");
 
       var endpoints = [
-        list.children().at(6).text(),
         list.children().at(7).text(),
-        list.children().at(8).text()
+        list.children().at(8).text(),
+        list.children().at(9).text()
       ];
-      expect(endpoints).to.deep.equal(["host-1:1", "host-1:2", "host-1:3"]);
+      expect(endpoints).to.deep.equal(["172.16.190.4:1", "172.16.190.4:2", "172.16.190.4:3"]);
     });
   });
 

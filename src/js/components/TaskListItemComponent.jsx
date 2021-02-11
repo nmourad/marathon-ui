@@ -68,7 +68,7 @@ var TaskListItemComponent = React.createClass({
         <a className="text-muted"
             href={`${scheme}://${task.ipAddresses[0].ipAddress}:${ports[0]}`}
             target="_blank">
-          {`${task.host}:${name}`}
+          {`${scheme}://${task.ipAddresses[0].ipAddress}:${ports[0]}`}
         </a>
       );
     }

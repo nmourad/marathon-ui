@@ -91,7 +91,7 @@ var TaskDetailComponent = React.createClass({
     }
 
     return task.ports.map((port) => {
-      let endpoint = `${task.host}:${port}`;
+      let endpoint = `${task.ipAddresses[0].ipAddress}:${port}`;
       return (
         <dd key={endpoint} className="overflow-ellipsis">
           <a href={`//${endpoint}`} target="_blank">{endpoint}</a>

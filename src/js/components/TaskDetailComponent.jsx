@@ -8,6 +8,7 @@ import AppVolumesListComponent from "../components/AppVolumesListComponent";
 import States from "../constants/States";
 import TimeFieldComponent from "../components/TimeFieldComponent";
 import TogglableTabsComponent from "../components/TogglableTabsComponent";
+import ServiceSchemeUtil from "../helpers/ServiceSchemeUtil";
 import TabPaneComponent from "../components/TabPaneComponent";
 import TaskHealthComponent from "../components/TaskHealthComponent";
 import TaskMesosUrlComponent from "../components/TaskMesosUrlComponent";
@@ -89,12 +90,13 @@ var TaskDetailComponent = React.createClass({
 
       return (<dd>n/a</dd>);
     }
-
+    const scheme = ServiceSchemeUtil
+    .getServiceSchemeFromLabels(app.labels, 0);
     return task.ports.map((port) => {
       let endpoint = `${task.ipAddresses[0].ipAddress}:${port}`;
       return (
         <dd key={endpoint} className="overflow-ellipsis">
-          <a href={`//${endpoint}`} target="_blank">{endpoint}</a>
+          <a href={`${scheme}://${endpoint}`} target="_blank">{endpoint}</a>
         </dd>
       );
     });

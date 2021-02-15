@@ -2,6 +2,8 @@ name: PostSubmit
 on:
   push:
     tags:
+    branches:
+      - criteo
 jobs:
   publish:
     name: Publish

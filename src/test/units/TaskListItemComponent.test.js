@@ -24,6 +24,7 @@ describe("Task List Item component", function () {
       status: "status-0",
       updatedAt: "2015-06-29T14:11:58.709Z",
       version: "2015-06-29T13:54:24.171Z",
+      ipAddresses: [{ipAddress: "192.168.0.10", protocol: "IPv4"}]
     };
 
     this.component = shallow(
@@ -56,9 +57,9 @@ describe("Task List Item component", function () {
     }
 
     it("has a HTTP service url when app does not have scheme label", function() {
-      expect(getNthServiceLink(this.component, 0)).to.equal("http://host-1:8081");
-      expect(getNthServiceLink(this.component, 1)).to.equal("http://host-1:8082");
-      expect(getNthServiceLink(this.component, 2)).to.equal("http://host-1:8083");
+      expect(getNthServiceLink(this.component, 0)).to.equal("http://192.168.0.10:8081");
+      expect(getNthServiceLink(this.component, 1)).to.equal("http://192.168.0.10:8082");
+      expect(getNthServiceLink(this.component, 2)).to.equal("http://192.168.0.10:8083");
     });
 
     it("has only https schemes", function() {
@@ -69,7 +70,8 @@ describe("Task List Item component", function () {
         ports: [8081, 8082, 8083],
         status: "status-0",
         updatedAt: "2015-06-29T14:11:58.709Z",
-        version: "2015-06-29T13:54:24.171Z"
+        version: "2015-06-29T13:54:24.171Z",
+      	ipAddresses: [{ipAddress: "192.168.0.10", protocol: "IPv4"}]
       };
   
       this.component = shallow(
@@ -83,9 +85,9 @@ describe("Task List Item component", function () {
                                onToggle={()=>{}}
                                task={model} />
       );
-      expect(getNthServiceLink(this.component, 0)).to.equal("https://host-1:8081");
-      expect(getNthServiceLink(this.component, 1)).to.equal("https://host-1:8082");
-      expect(getNthServiceLink(this.component, 2)).to.equal("https://host-1:8083");
+      expect(getNthServiceLink(this.component, 0)).to.equal("https://192.168.0.10:8081");
+      expect(getNthServiceLink(this.component, 1)).to.equal("https://192.168.0.10:8082");
+      expect(getNthServiceLink(this.component, 2)).to.equal("https://192.168.0.10:8083");
     })
 
     it("has different schemes depending on the port", function() {
@@ -96,7 +98,8 @@ describe("Task List Item component", function () {
         ports: [8081, 8082, 8083],
         status: "status-0",
         updatedAt: "2015-06-29T14:11:58.709Z",
-        version: "2015-06-29T13:54:24.171Z"
+        version: "2015-06-29T13:54:24.171Z",
+      	ipAddresses: [{ipAddress: "192.168.0.10", protocol: "IPv4"}]
       };
   
       this.component = shallow(
@@ -111,9 +114,9 @@ describe("Task List Item component", function () {
                                onToggle={()=>{}}
                                task={model} />
       );
-      expect(getNthServiceLink(this.component, 0)).to.equal("https://host-1:8081");
-      expect(getNthServiceLink(this.component, 1)).to.equal("http://host-1:8082");
-      expect(getNthServiceLink(this.component, 2)).to.equal("http://host-1:8083");
+      expect(getNthServiceLink(this.component, 0)).to.equal("https://192.168.0.10:8081");
+      expect(getNthServiceLink(this.component, 1)).to.equal("http://192.168.0.10:8082");
+      expect(getNthServiceLink(this.component, 2)).to.equal("http://192.168.0.10:8083");
     })
   })
 

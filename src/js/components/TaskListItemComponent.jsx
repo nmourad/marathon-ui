@@ -90,7 +90,7 @@ var TaskListItemComponent = React.createClass({
 
       return (
         <span className="text-muted">
-          {task.host}:[{joinNodes(portNodes)}]
+          {task.ipAddresses[0].ipAddress}:[{joinNodes(portNodes)}]
         </span>
       );
     }

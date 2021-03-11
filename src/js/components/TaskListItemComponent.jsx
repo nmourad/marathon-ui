@@ -79,9 +79,9 @@ var TaskListItemComponent = React.createClass({
           .getServiceSchemeFromLabels(props.labels, i);
         const name = getPortDecoration(props.portDefinitions, i, port);
         return (
-          <a key={`${task.host}:${port}`}
+          <a key={`${task.ipAddresses[0].ipAddress}:${port}`}
               className="text-muted"
-              href={`${scheme}://${task.host}:${port}`}
+              href={`${scheme}://${task.ipAddresses[0].ipAddress}:${port}`}
               target="_blank">
             {name}
           </a>

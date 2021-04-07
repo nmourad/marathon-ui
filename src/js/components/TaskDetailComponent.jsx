@@ -62,6 +62,7 @@ var TaskDetailComponent = React.createClass({
     var props = this.props;
     var task = props.task;
     var app = AppsStore.getCurrentApp(props.appId);
+    var ip = task.host;
 
     if ((task.ports == null || task.ports.length === 0) &&
         (task.ipAddresses == null || task.ipAddresses.length === 0)) {
@@ -93,7 +94,10 @@ var TaskDetailComponent = React.createClass({
     const scheme = ServiceSchemeUtil
     .getServiceSchemeFromLabels(app.labels, 0);
     return task.ports.map((port) => {
-      let endpoint = `${task.ipAddresses[0].ipAddress}:${port}`;
+      if (task.ipAddresses.length > 0) {
+          ip = task.ipAddresses[0].ipAddress;
+      }
+      let endpoint = `${ip}:${port}`;
       return (
         <dd key={endpoint} className="overflow-ellipsis">
           <a href={`${scheme}://${endpoint}`} target="_blank">{endpoint}</a>

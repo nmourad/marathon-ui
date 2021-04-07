@@ -55,9 +55,14 @@ var TaskListItemComponent = React.createClass({
     var task = this.props.task;
     var props = this.props;
     var ports = task.ports;
+    var ip = task.host;
 
     if (ports == null || ports.length === 0 ) {
       return (<span className="text-muted">{task.host}</span>);
+    }
+
+    if (task.ipAddresses.length > 0) {
+        ip = task.ipAddresses[0].ipAddress;
     }
 
     if (ports != null && ports.length === 1) {
@@ -66,9 +71,9 @@ var TaskListItemComponent = React.createClass({
       const name = getPortDecoration(props.portDefinitions, 0, ports[0]);
       return (
         <a className="text-muted"
-            href={`${scheme}://${task.ipAddresses[0].ipAddress}:${ports[0]}`}
+            href={`${scheme}://${ip}:${ports[0]}`}
             target="_blank">
-          {`${scheme}://${task.ipAddresses[0].ipAddress}:${ports[0]}`}
+          {`${scheme}://${ip}:${ports[0]}`}
         </a>
       );
     }
@@ -79,9 +84,9 @@ var TaskListItemComponent = React.createClass({
           .getServiceSchemeFromLabels(props.labels, i);
         const name = getPortDecoration(props.portDefinitions, i, port);
         return (
-          <a key={`${task.ipAddresses[0].ipAddress}:${port}`}
+          <a key={`${ip}:${port}`}
               className="text-muted"
-              href={`${scheme}://${task.ipAddresses[0].ipAddress}:${port}`}
+              href={`${scheme}://${ip}:${port}`}
               target="_blank">
             {name}
           </a>
@@ -90,7 +95,7 @@ var TaskListItemComponent = React.createClass({
 
       return (
         <span className="text-muted">
-          {task.ipAddresses[0].ipAddress}:[{joinNodes(portNodes)}]
+          {ip}:[{joinNodes(portNodes)}]
         </span>
       );
     }

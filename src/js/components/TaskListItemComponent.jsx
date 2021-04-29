@@ -237,6 +237,7 @@ var TaskListItemComponent = React.createClass({
       status = task.status;
     }
 
+    var host = task.host
     var taskId = task.id;
     var taskURI = "#apps/" +
       encodeURIComponent(this.props.appId) +
@@ -299,6 +300,9 @@ var TaskListItemComponent = React.createClass({
           <a href={taskURI}>{taskId}</a>
           <br />
           {endpoints}
+        </td>
+        <td>
+          {host}
         </td>
         <td className={healthClassSet} title={this.props.taskHealthMessage}>
           {this.props.taskHealthMessage}

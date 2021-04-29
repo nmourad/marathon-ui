@@ -221,6 +221,13 @@ var TaskListItemComponent = React.createClass({
     </a>);
   },
 
+  getHostLink: function () {
+    const hostLink = Config.hostLinkGenerator(this.props.task.host);
+    return (<a href={hostLink} target="_blank">
+        {this.props.task.host}
+    </a>);
+  },
+
   render: function () {
     var task = this.props.task;
     var sortKey = this.props.sortKey;
@@ -310,7 +317,7 @@ var TaskListItemComponent = React.createClass({
           </span>
         </td>
         <td>
-          {host}
+          {this.getHostLink()}
         </td>
         <td className="text-center">
           {this.getLogsLink()}

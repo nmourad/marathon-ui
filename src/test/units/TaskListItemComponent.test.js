@@ -12,6 +12,9 @@ Config.taskLogsLinkGenerator = function (appId, taskId) {
 Config.debugLinkGenerator = function (taskId) {
   return "https://debug/?taskId=" + taskId;
 };
+Config.hostLinkGenerator = function (host) {
+  return "http://" + host + ":5051";
+};
 
 describe("Task List Item component", function () {
 

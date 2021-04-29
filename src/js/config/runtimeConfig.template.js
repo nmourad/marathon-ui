@@ -30,7 +30,7 @@ var runtimeConfig = {
   },
 
   // The generator building the host link to access host info
-  debugLinkGenerator: function (host) {
+  hostLinkGenerator: function (host) {
     return "http://" + host + ":5051";
   },
   // Callback when "troubleshoot" button is clicked

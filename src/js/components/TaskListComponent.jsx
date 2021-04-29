@@ -220,12 +220,6 @@ var TaskListComponent = React.createClass({
                 ID {this.getCaret("id")}
             </span>
           </th>
-        <th className={hostClassSet}>
-          <span onClick={this.sortBy.bind(null, "host")}
-            className={headerClassSet}>
-            Host {this.getCaret("host")}
-        </span>
-        </th>
           <th className={hasHealthClassSet}>
             <span onClick={this.sortBy.bind(null, "healthStatus")}
               className={headerClassSet}>
@@ -236,6 +230,12 @@ var TaskListComponent = React.createClass({
           <span onClick={this.sortBy.bind(null, "status")}
             className={headerClassSet}>
             Status {this.getCaret("status")}
+        </span>
+      </th>
+      <th className={hostClassSet}>
+        <span onClick={this.sortBy.bind(null, "host")}
+          className={headerClassSet}>
+          Host {this.getCaret("host")}
         </span>
       </th>
       <th className="text-center">

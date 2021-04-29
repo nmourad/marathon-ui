@@ -301,9 +301,6 @@ var TaskListItemComponent = React.createClass({
           <br />
           {endpoints}
         </td>
-        <td>
-          {host}
-        </td>
         <td className={healthClassSet} title={this.props.taskHealthMessage}>
           {this.props.taskHealthMessage}
         </td>
@@ -311,6 +308,9 @@ var TaskListItemComponent = React.createClass({
           <span className={statusClassSet}>
             {status}
           </span>
+        </td>
+        <td>
+          {host}
         </td>
         <td className="text-center">
           {this.getLogsLink()}

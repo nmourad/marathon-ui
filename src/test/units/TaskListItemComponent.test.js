@@ -131,7 +131,7 @@ describe("Task List Item component", function () {
   it("has the correct version", function () {
     expect(this.component
       .find("td")
-      .at(9)
+      .at(10)
       .children()
       .first()
       .props()
@@ -142,7 +142,7 @@ describe("Task List Item component", function () {
   it("has the correct update timestamp", function () {
     var cellProps = this.component
       .find("td")
-      .at(10)
+      .at(11)
       .children()
       .first()
       .props();
@@ -153,7 +153,7 @@ describe("Task List Item component", function () {
   it("has the correct logs link", function () {
     var a = this.component
     .find("td")
-    .at(4)
+    .at(5)
     .children()
     .first()
     .props();
@@ -163,7 +163,7 @@ describe("Task List Item component", function () {
   it("has the correct debug link", function () {
     var a = this.component
     .find("td")
-    .at(8)
+    .at(9)
     .children()
     .first()
     .props();

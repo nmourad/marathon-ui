@@ -51,6 +51,12 @@ var config = Object.assign({
   debugLinkGenerator: function () {
     return "";
   },
+  // The generator build the exec links for host
+  // input: the host name
+  // output: the link to the host
+  hostLinkGenerator: function () {
+    return "";
+  },
   // The generator building link to sandbox to override
   // default urls (pointing to mesos leader ui)
   // It returns a url

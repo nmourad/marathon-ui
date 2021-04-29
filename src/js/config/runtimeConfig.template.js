@@ -29,6 +29,10 @@ var runtimeConfig = {
     return "http://webterminal/?taskId=" + taskId;
   },
 
+  // The generator building the host link to access host info
+  hostLinkGenerator: function (host) {
+    return "http://" + host + ":5051";
+  },
   // Callback when "troubleshoot" button is clicked
   troubleshootApp: function(appId) {
     var win = window.open("http://troubleshoot/appId/" + appId, '_blank');

@@ -167,6 +167,10 @@ var TaskListComponent = React.createClass({
     });
 
     var idClassSet = classNames({
+      "cell-highlighted": state.sortKey === "id"
+    });
+
+    var hostClassSet = classNames({
       "cell-highlighted": state.sortKey === "host"
     });
 
@@ -211,9 +215,9 @@ var TaskListComponent = React.createClass({
                 onChange={props.toggleAllTasks} />
             </th>
             <th className={idClassSet}>
-              <span onClick={this.sortBy.bind(null, "host")}
+              <span onClick={this.sortBy.bind(null, "id")}
                 className={headerClassSet}>
-                ID {this.getCaret("host")}
+                ID {this.getCaret("id")}
             </span>
           </th>
           <th className={hasHealthClassSet}>
@@ -226,6 +230,12 @@ var TaskListComponent = React.createClass({
           <span onClick={this.sortBy.bind(null, "status")}
             className={headerClassSet}>
             Status {this.getCaret("status")}
+        </span>
+      </th>
+      <th className={hostClassSet}>
+        <span onClick={this.sortBy.bind(null, "host")}
+          className={headerClassSet}>
+          Host {this.getCaret("host")}
         </span>
       </th>
       <th className="text-center">

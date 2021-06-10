@@ -1,0 +1,20 @@
+name: PreSubmit
+on:
+  - pull_request
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 5.x
+      - name: install gulp
+        run: npm install -g gulp
+      - name: install
+        run: npm install
+      - name: build dist
+        run: npm run dist

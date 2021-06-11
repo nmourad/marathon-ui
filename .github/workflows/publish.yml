@@ -1,9 +1,7 @@
 name: PostSubmit
 on:
-  push:
-    tags:
-    branches:
-      - criteo
+  release:
+    types: [published]
 jobs:
   publish:
     name: Publish

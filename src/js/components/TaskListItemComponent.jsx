@@ -62,7 +62,7 @@ var TaskListItemComponent = React.createClass({
     }
 
     if (task.ipAddresses.length > 0) {
-        ip = task.ipAddresses[0].ipAddress;
+      ip = task.ipAddresses[0].ipAddress;
     }
 
     if (ports != null && ports.length === 1) {
@@ -244,7 +244,7 @@ var TaskListItemComponent = React.createClass({
       status = task.status;
     }
 
-    var host = task.host
+    var host = task.host;
     var taskId = task.id;
     var taskURI = "#apps/" +
       encodeURIComponent(this.props.appId) +

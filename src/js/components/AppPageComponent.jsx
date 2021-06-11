@@ -391,8 +391,10 @@ var AppPageComponent = React.createClass({
     var name = volumeId;
     if (volumeId == null) {
       name = PathUtil.getAppName(state.appId);
-      var appHealthStatus =
-        <AppStatusComponent model={model} showSummary={true} showAntisnowballStatus={true} />;
+      var appHealthStatus = (
+        <AppStatusComponent model={model}
+          showSummary={true} showAntisnowballStatus={true} />
+      );
 
       var appHealthBar = (
         <div className="app-health-detail">

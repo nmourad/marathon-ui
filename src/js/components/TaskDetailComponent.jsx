@@ -95,7 +95,7 @@ var TaskDetailComponent = React.createClass({
     .getServiceSchemeFromLabels(app.labels, 0);
     return task.ports.map((port) => {
       if (task.ipAddresses.length > 0) {
-          ip = task.ipAddresses[0].ipAddress;
+        ip = task.ipAddresses[0].ipAddress;
       }
       let endpoint = `${ip}:${port}`;
       return (

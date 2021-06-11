@@ -20,6 +20,7 @@ import AppsActions from "../actions/AppsActions";
 import DeploymentActions from "../actions/DeploymentActions";
 import DialogActions from "../actions/DialogActions";
 import QueueActions from "../actions/QueueActions";
+import AntiSnowballActions from "../actions/AntiSnowballActions";
 import PluginActions from "../actions/PluginActions";
 
 import "../plugin/PluginInterface";
@@ -232,6 +233,7 @@ var Marathon = React.createClass({
 
     if (state.activeAppId != null) {
       AppsActions.requestApp(state.activeAppId);
+      AntiSnowballActions.requestAntiSnowball(state.activeAppId);
       QueueActions.requestQueue();
     } else {
       AppsActions.requestApps();

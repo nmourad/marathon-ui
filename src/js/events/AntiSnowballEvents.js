@@ -1,0 +1,8 @@
+const AntiSnowballEvents = {
+  CHANGE: "ANTISNOWBALL_EVENTS_CHANGE",
+  REQUEST: "ANTISNOWBALL_EVENTS_REQUEST",
+  REQUEST_ERROR: "ANTISNOWBALL_EVENTS_REQUEST_ERROR"
+};
+
+export default Object.freeze(AntiSnowballEvents);
+

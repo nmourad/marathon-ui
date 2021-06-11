@@ -4,6 +4,7 @@ import React from "react/addons";
 
 import AppStatus from "../constants/AppStatus";
 import QueueStore from "../stores/QueueStore";
+import AntiSnowballStore from "../stores/AntiSnowballStore";
 import Util from "../helpers/Util";
 
 import {statusNameMapping} from "../constants/LabelMapping";
@@ -22,6 +23,7 @@ var AppStatusComponent = React.createClass({
 
   propTypes: {
     model: React.PropTypes.object.isRequired,
+    showAntisnowballStatus: React.PropTypes.bool,
     showSummary: React.PropTypes.bool
   },
 
@@ -30,7 +32,8 @@ var AppStatusComponent = React.createClass({
 
     return !Util.compareProperties(props.model, nextProps.model, "status",
         "tasksRunning", "instances") ||
-      props.showSummary !== nextProps.showSummary;
+      props.showSummary !== nextProps.showSummary ||
+      props.showAntisnowballStatus !== nextProps.showAntisnowballStatus;
   },
 
   getTasksSummary: function () {
@@ -44,6 +47,29 @@ var AppStatusComponent = React.createClass({
         {`(${props.model.tasksRunning} of ${props.model.instances} instances)`}
       </span>
     );
+  },
+
+  getAntiSnowballStatus: function () {
+    var props = this.props;
+    if (props.showAntisnowballStatus !== true) {
+      return null;
+    }
+
+    var model = this.props.model;
+    var antiSnowballStatus = AntiSnowballStore.getAntiSnowballStatus(model.id);
+    if (antiSnowballStatus.active === true) {
+      return (
+        <span className="snowball-status">
+        Antisnowball has been active recently
+        </span>
+      );
+    } else {
+      return (
+        <span className="snowball-status">
+        Antisnowball is inactive
+        </span>
+      );
+    }
   },
 
   getStatusTitle: function () {
@@ -79,6 +105,7 @@ var AppStatusComponent = React.createClass({
         <i className={iconClassSet}></i>
         {statusNameMapping[model.status]}
         {this.getTasksSummary()}
+        {this.getAntiSnowballStatus()}
       </span>
     );
   }

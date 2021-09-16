@@ -9,6 +9,7 @@ import TaskStatus from "../constants/TaskStatus";
 import Config from "../config/config";
 import ServiceSchemeUtil from "../helpers/ServiceSchemeUtil";
 import TaskMesosUrlComponent from "./TaskMesosUrlComponent";
+import TooltipComponent from "./TooltipComponent";
 
 function joinNodes(nodes, separator = ", ") {
   var lastIndex = nodes.length - 1;
@@ -53,11 +54,10 @@ var TaskListItemComponent = React.createClass({
 
   getHostAndPorts: function () {
     var task = this.props.task;
-    var props = this.props;
     var ports = task.ports;
     var ip = task.host;
 
-    if (ports == null || ports.length === 0 ) {
+    if (ports == null || ports.length === 0) {
       return (<span className="text-muted">{task.host}</span>);
     }
 
@@ -65,34 +65,10 @@ var TaskListItemComponent = React.createClass({
       ip = task.ipAddresses[0].ipAddress;
     }
 
-    if (ports != null && ports.length === 1) {
-      const scheme = ServiceSchemeUtil
-        .getServiceSchemeFromLabels(props.labels, 0);
-      const name = getPortDecoration(props.portDefinitions, 0, ports[0]);
-      return (
-        <a className="text-muted"
-            href={`${scheme}://${ip}:${ports[0]}`}
-            target="_blank">
-          {`${scheme}://${ip}:${ports[0]}`}
-        </a>
-      );
-    }
-
-    if (ports != null && ports.length > 1) {
-      let portNodes = ports.map(function (port, i) {
-        const scheme = ServiceSchemeUtil
-          .getServiceSchemeFromLabels(props.labels, i);
-        const name = getPortDecoration(props.portDefinitions, i, port);
-        return (
-          <a key={`${ip}:${port}`}
-              className="text-muted"
-              href={`${scheme}://${ip}:${port}`}
-              target="_blank">
-            {name}
-          </a>
-        );
-      });
-
+    if (ports.length > 0) {
+      let portNodes = ports.map(function (port, i)  {
+        return this.getPortQuickLink(i, port, ip);
+      },this);
       return (
         <span className="text-muted">
           {ip}:[{joinNodes(portNodes)}]
@@ -226,6 +202,49 @@ var TaskListItemComponent = React.createClass({
     return (<a href={hostLink} target="_blank">
         {this.props.task.host}
     </a>);
+  },
+
+  getPortQuickLink: function (index, port, ip) {
+    const SSHFORWARD_LABEL_NAME = "sshforward";
+
+    var portDefinitions = this.props.portDefinitions;
+    var props = this.props;
+    var ports = props.task.ports;
+    const scheme = ServiceSchemeUtil
+      .getServiceSchemeFromLabels(props.labels, index);
+    const name = getPortDecoration(portDefinitions, index, port);
+    if (name === SSHFORWARD_LABEL_NAME) {
+      var portFwConfig = ports.filter(
+        (port, idx) =>
+          getPortDecoration(portDefinitions, idx, port)
+          !== SSHFORWARD_LABEL_NAME)
+        .map(function (portNumber) {
+          return "-L " + portNumber + ":127.0.0.1:" + portNumber;
+        }).join(" ");
+      var app = AppsStore.getCurrentApp(props.appId);
+      var command = `ssh -N ${portFwConfig} -p ${port} ${app.user}@${ip}`;
+      return (
+        <TooltipComponent className="top" message="Click to copy ssh
+             forward command">
+          <a key={`${ip}:${port}`}
+             className="text-muted"
+             onClick={() => {
+               navigator.clipboard.writeText(command);
+             }}
+             target="_blank">
+            {name}
+          </a>
+        </TooltipComponent>
+      );
+    } else {
+      return (
+        <a className="text-muted"
+           href={`${scheme}://${ip}:${port}`}
+           target="_blank">
+          {name}
+        </a>
+      );
+    }
   },
 
   render: function () {

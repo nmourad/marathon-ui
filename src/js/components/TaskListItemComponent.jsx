@@ -226,8 +226,7 @@ var TaskListItemComponent = React.createClass({
       return (
         <TooltipComponent className="top" message="Click to copy ssh
              forward command">
-          <a key={`${ip}:${port}`}
-             className="text-muted"
+          <a className="text-muted"
              onClick={() => {
                navigator.clipboard.writeText(command);
              }}
